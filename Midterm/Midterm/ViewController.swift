@@ -22,12 +22,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var videoView: UIView!
     @IBOutlet weak var soundButton: UIButton!
+    @IBOutlet weak var screenButton: UIButton!
+    @IBOutlet weak var forwardButton: UIButton!
+    @IBOutlet weak var backwardButton: UIButton!
     
     var player: AVPlayer!
     var playerLayer: AVPlayerLayer!
     
     var isVideoPlaying = false
     var isMuted = false
+    var isRotated = false
     
     let url = URL(string: "https://s3-ap-northeast-1.amazonaws.com/mid-exam/Video/taeyeon.mp4")
     
@@ -166,12 +170,82 @@ class ViewController: UIViewController {
         
 
     }
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        if UIDevice.current.orientation.isLandscape {
+            self.navigationController?.setNavigationBarHidden(true, animated: false)
+            
+            screenButton.setImage(#imageLiteral(resourceName: "full_screen_exit"), for: .normal)
+            
+            let originalPlay = UIImage(named: "play_button")
+            let renderedPlay = originalPlay?.withRenderingMode(.alwaysTemplate)
+            playButton.setImage(renderedPlay, for: .normal)
+            playButton.tintColor = UIColor.white
+            
+            let originalForward = UIImage(named: "fast_forward")
+            let renderedForward = originalForward?.withRenderingMode(.alwaysTemplate)
+            forwardButton.setImage(renderedForward, for: .normal)
+            forwardButton.tintColor = UIColor.white
+            
+            let originalBackward = UIImage(named: "rewind")
+            let renderedBackward = originalBackward?.withRenderingMode(.alwaysTemplate)
+            backwardButton.setImage(renderedBackward, for: .normal)
+            backwardButton.tintColor = UIColor.white
+            
+            let originalSound = UIImage(named: "volume_off")
+            let renderedSound = originalSound?.withRenderingMode(.alwaysTemplate)
+            soundButton.setImage(renderedSound, for: .normal)
+            soundButton.tintColor = UIColor.white
+            
+            let originalScreen = UIImage(named: "full_screen_exit")
+            let renderedScreen = originalScreen?.withRenderingMode(.alwaysTemplate)
+            screenButton.setImage(renderedScreen, for: .normal)
+            screenButton.tintColor = UIColor.white
+            
+            totalDuration.textColor = UIColor.white
+            currentTime.textColor = UIColor.white
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        } else {
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
+            
+            playButton.setImage(#imageLiteral(resourceName: "play_button"), for: .normal)
+            forwardButton.setImage(#imageLiteral(resourceName: "fast_forward"), for: .normal)
+            backwardButton.setImage(#imageLiteral(resourceName: "rewind"), for: .normal)
+            soundButton.setImage(#imageLiteral(resourceName: "volume_off"), for: .normal)
+            screenButton.setImage(#imageLiteral(resourceName: "full_screen_button"), for: .normal)
+            
+            totalDuration.textColor = UIColor.black
+            currentTime.textColor = UIColor.black
+
+        }
     }
-
+    
+    
+    @IBAction func toFullScreen(_ sender: Any) {
+        
+        if isRotated {
+            let value = UIInterfaceOrientation.portrait.rawValue
+            UIDevice.current.setValue(value, forKey: "orientation")
+            
+            screenButton.setImage(#imageLiteral(resourceName: "full_screen_exit"), for: .normal)
+            
+        } else {
+            let value = UIInterfaceOrientation.landscapeLeft.rawValue
+            UIDevice.current.setValue(value, forKey: "orientation")
+            
+            screenButton.setImage(#imageLiteral(resourceName: "full_screen_button"), for: .normal)
+        }
+        
+    }
+    
+//    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+//        return .landscapeLeft
+//    }
+//
+//    override var shouldAutorotate: Bool {
+//        return true
+//    }
+    
 
 }
 
