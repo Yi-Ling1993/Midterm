@@ -21,17 +21,17 @@ class ViewController: UIViewController {
     @IBOutlet weak var currentTime: UILabel!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var videoView: UIView!
+    @IBOutlet weak var soundButton: UIButton!
     
     var player: AVPlayer!
     var playerLayer: AVPlayerLayer!
     
     var isVideoPlaying = false
+    var isMuted = false
     
     let url = URL(string: "https://s3-ap-northeast-1.amazonaws.com/mid-exam/Video/taeyeon.mp4")
     
     @IBAction func playVideo(_ sender: Any) {
-        
-        
         
         if isVideoPlaying {
             player.pause()
@@ -43,6 +43,20 @@ class ViewController: UIViewController {
         
         isVideoPlaying = !isVideoPlaying
     }
+    
+    @IBAction func muteVideo(_ sender: Any) {
+        
+        if isMuted {
+            player.isMuted = true
+            soundButton.setImage(#imageLiteral(resourceName: "volume_up"), for: .normal)
+        } else {
+            player.isMuted = false
+            soundButton.setImage(#imageLiteral(resourceName: "volume_off"), for: .normal)
+        }
+        
+        isMuted = !isMuted
+    }
+    
     
     @IBAction func foward(_ sender: Any) {
         
@@ -68,9 +82,52 @@ class ViewController: UIViewController {
             newTime = 0
         }
         
-        let time: CMTime = CMTimeMake(Int64(newTime * 1000), 1000)
+        let time: CMTime = CMTimeMake(Int64(newTime*1000), 1000)
         
         player.seek(to: time)
+    }
+    
+    @IBAction func changeSlider(_ sender: UISlider) {
+        
+        player.seek(to: CMTimeMake(Int64(sender.value*1000), 1000))
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+        if keyPath == "duration", let duration = player.currentItem?.duration.seconds, duration > 0 {
+            
+            self.totalDuration.text = getTimeString(from: player.currentItem!.duration)
+        }
+    }
+    
+    func getTimeString(from time: CMTime) -> String {
+        
+        let totalSeconds = CMTimeGetSeconds(time)
+        let hours = Int(totalSeconds / 3600)
+        let minutes = Int(totalSeconds / 60) % 60
+        let seconds = Int(totalSeconds.truncatingRemainder(dividingBy: 60))
+        
+        if hours > 0 {
+            return String(format: "%i:%02i:%02i", [hours,minutes,seconds])
+        } else {
+            return String(format: "%02i:%02i", [minutes,seconds])
+        }
+    }
+    
+    func addTimeObserver() {
+        
+        let interval = CMTime(seconds: 0.5, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        let mainQueue = DispatchQueue.main
+        _ = player.addPeriodicTimeObserver(forInterval: interval, queue: mainQueue, using: { [weak self]
+            time in
+            
+            guard let currentItem = self?.player.currentItem else { return }
+            
+            self?.sliderBar.maximumValue = Float(currentItem.duration.seconds)
+            self?.sliderBar.minimumValue = 0
+            self?.sliderBar.value = Float(currentItem.currentTime().seconds)
+            self?.currentTime.text = self?.getTimeString(from: currentItem.currentTime())
+        })
     }
     
     
@@ -80,6 +137,8 @@ class ViewController: UIViewController {
         
         player = AVPlayer(url: url! )
         
+        player.currentItem?.addObserver(self, forKeyPath: "duration", options: [.new, .initial], context: nil)
+        addTimeObserver()
         playerLayer = AVPlayerLayer(player: player)
         playerLayer.videoGravity = .resize
         
@@ -97,7 +156,7 @@ class ViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-//        playerLayer.frame = videoView.bounds
+        playerLayer.frame = videoView.bounds
 
     }
     

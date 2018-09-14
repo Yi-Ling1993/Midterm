@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Qsv-vn-fvE">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -16,17 +16,17 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Midterm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入欲播放影片網址" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gdP-o5-tax">
-                                <rect key="frame" x="10" y="79" width="275" height="30"/>
+                                <rect key="frame" x="10" y="79" width="314" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WbR-Dg-4wQ">
-                                <rect key="frame" x="295" y="79" width="70" height="30"/>
+                                <rect key="frame" x="334" y="79" width="70" height="30"/>
                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Piq-ed-EQd"/>
@@ -50,32 +50,38 @@
                                     <action selector="search:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BXz-uy-fgu"/>
                                 </connections>
                             </button>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="zue-7u-1wb">
-                                <rect key="frame" x="59.5" y="553" width="251.5" height="31"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="zue-7u-1wb">
+                                <rect key="frame" x="59.666666666666657" y="622" width="290.33333333333337" height="31"/>
                                 <color key="tintColor" red="0.58105844259999995" green="0.12855249639999999" blue="0.57453137639999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="changeSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="wgX-Ah-rQi"/>
+                                </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y0n-2F-dOt">
-                                <rect key="frame" x="10" y="558.5" width="41.5" height="18"/>
+                                <rect key="frame" x="10" y="627.66666666666663" width="41.666666666666664" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U4J-Xp-hRu">
-                                <rect key="frame" x="319" y="557.5" width="46" height="21"/>
+                                <rect key="frame" x="358" y="626.66666666666663" width="46" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EUA-qa-LPH">
-                                <rect key="frame" x="47.5" y="613" width="24" height="24"/>
+                                <rect key="frame" x="67" y="682" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="Q9T-Cd-Ysl"/>
                                     <constraint firstAttribute="width" constant="24" id="nax-S1-8Sb"/>
                                 </constraints>
-                                <state key="normal" image="volume_up"/>
+                                <state key="normal" image="volume_off"/>
+                                <connections>
+                                    <action selector="muteVideo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NgU-YP-llM"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zU7-ZL-96I">
-                                <rect key="frame" x="111.5" y="613" width="24" height="24"/>
+                                <rect key="frame" x="131" y="682" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="fbp-x6-XgB"/>
                                     <constraint firstAttribute="height" constant="24" id="liy-sx-JGn"/>
@@ -86,7 +92,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhM-fc-J19">
-                                <rect key="frame" x="175.5" y="613" width="24" height="24"/>
+                                <rect key="frame" x="195" y="682" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="EeW-MP-85V"/>
                                     <constraint firstAttribute="height" constant="24" id="gUZ-wW-0lv"/>
@@ -97,7 +103,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I6b-XN-e1o">
-                                <rect key="frame" x="239.5" y="613" width="24" height="24"/>
+                                <rect key="frame" x="259" y="682" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="uIw-2Z-RN2"/>
                                     <constraint firstAttribute="width" constant="24" id="xOW-Av-jKp"/>
@@ -108,7 +114,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ral-Oa-3iP">
-                                <rect key="frame" x="303.5" y="613" width="24" height="24"/>
+                                <rect key="frame" x="323" y="682" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="U04-IY-68o"/>
                                     <constraint firstAttribute="width" constant="24" id="nHw-ln-u9Q"/>
@@ -116,7 +122,7 @@
                                 <state key="normal" image="full_screen_button"/>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NFg-aN-Fz2">
-                                <rect key="frame" x="0.0" y="228" width="375" height="211"/>
+                                <rect key="frame" x="0.0" y="251.66666666666669" width="414" height="232.66666666666669"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="NFg-aN-Fz2" secondAttribute="height" multiplier="16:9" id="HtP-KD-7ze"/>
@@ -159,6 +165,7 @@
                         <outlet property="currentTime" destination="Y0n-2F-dOt" id="EAf-OJ-Gd5"/>
                         <outlet property="playButton" destination="dhM-fc-J19" id="Mb8-sa-4hQ"/>
                         <outlet property="sliderBar" destination="zue-7u-1wb" id="IEY-yq-1Cv"/>
+                        <outlet property="soundButton" destination="EUA-qa-LPH" id="5xo-sa-9tw"/>
                         <outlet property="textfield" destination="gdP-o5-tax" id="i2w-c8-OCJ"/>
                         <outlet property="totalDuration" destination="U4J-Xp-hRu" id="DFL-Kt-jKh"/>
                         <outlet property="videoView" destination="NFg-aN-Fz2" id="dm2-Z9-kXi"/>
@@ -174,7 +181,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qsv-vn-fvE" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="eNa-L3-OdY">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.24705882352941178" green="0.31764705882352939" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
@@ -192,10 +199,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="fast_forward" width="12" height="12"/>
-        <image name="full_screen_button" width="12" height="12"/>
-        <image name="play_button" width="12" height="12"/>
-        <image name="rewind" width="12" height="12"/>
-        <image name="volume_up" width="12" height="12"/>
+        <image name="fast_forward" width="21" height="21"/>
+        <image name="full_screen_button" width="21" height="21"/>
+        <image name="play_button" width="21" height="21"/>
+        <image name="rewind" width="21" height="21"/>
+        <image name="volume_off" width="21" height="21"/>
     </resources>
 </document>
